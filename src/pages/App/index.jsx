@@ -10,6 +10,7 @@ import SignIn from '../SignIn'
 import Navbar from '../../components/Navbar'
 
 import './App.css'
+import Layout from '../../components/Layout'
 
 function AppRoutes () {
   const routes = useRoutes([
@@ -48,8 +49,10 @@ function AppRoutes () {
 function App () {
   return (
     <BrowserRouter>
-      <AppRoutes />
       <Navbar />
+      <Layout>
+        <AppRoutes />
+      </Layout>
     </BrowserRouter>
   )
 }
