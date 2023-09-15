@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useRoutes, BrowserRouter } from 'react-router-dom'
 
 import Home from '../Home'
@@ -12,11 +13,11 @@ import Navbar from '../../components/Navbar'
 import './App.css'
 import Layout from '../../components/Layout'
 
-function AppRoutes () {
+function AppRoutes ({ products }) {
   const routes = useRoutes([
     {
       path: '/',
-      element: <Home />
+      element: <Home products={products} />
     },
     {
       path: '/home',
@@ -47,11 +48,17 @@ function AppRoutes () {
 }
 
 function App () {
+  const [products, setProducts] = useState(null)
+
+  useEffect(() => {
+    fetch('https://api.escuelajs.co/api/v1/products').then(response => response.json()).then(data => setProducts(data))
+  }, [])
+
   return (
     <BrowserRouter>
       <Navbar />
       <Layout>
-        <AppRoutes />
+        <AppRoutes products={products} />
       </Layout>
     </BrowserRouter>
   )
