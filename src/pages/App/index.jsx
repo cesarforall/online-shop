@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRoutes, BrowserRouter } from 'react-router-dom'
+import { ShoppingCardProvider } from '../../context/Context'
 
 import Home from '../Home'
 import MyAccount from '../MyAccount'
@@ -55,12 +56,14 @@ function App () {
   }, [])
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Layout>
-        <AppRoutes products={products} />
-      </Layout>
-    </BrowserRouter>
+    <ShoppingCardProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Layout>
+          <AppRoutes products={products} />
+        </Layout>
+      </BrowserRouter>
+    </ShoppingCardProvider>
   )
 }
 
