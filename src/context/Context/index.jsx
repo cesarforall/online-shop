@@ -4,11 +4,17 @@ const ShoppingCardContext = createContext()
 
 export const ShoppingCardProvider = ({ children }) => {
   const [count, setCount] = useState(0)
+  const [showProductDetail, setShowProductDetail] = useState(false)
+  const [product, setProduct] = useState({})
 
   return (
     <ShoppingCardContext.Provider value={{
       count,
-      setCount
+      setCount,
+      showProductDetail,
+      setShowProductDetail,
+      product,
+      setProduct
     }}
     >
       {children}
