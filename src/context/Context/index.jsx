@@ -5,7 +5,7 @@ const ShoppingCardContext = createContext()
 export const ShoppingCardProvider = ({ children }) => {
   const [count, setCount] = useState(0)
   const [showProductDetail, setShowProductDetail] = useState(false)
-  const [product, setProduct] = useState({})
+  const [productDetail, setProductDetail] = useState({})
 
   return (
     <ShoppingCardContext.Provider value={{
@@ -13,8 +13,8 @@ export const ShoppingCardProvider = ({ children }) => {
       setCount,
       showProductDetail,
       setShowProductDetail,
-      product,
-      setProduct
+      productDetail,
+      setProductDetail
     }}
     >
       {children}

@@ -11,7 +11,10 @@ function Card ({ product }) {
   return (
     <div
       className='bg-white cursor-pointer w-56 h-60 rounded-lg' onClick={() => {
-        context.setShowProductDetail(true)
+        if (!context.showProductDetail) {
+          context.setProductDetail(product)
+          context.setShowProductDetail(true)
+        }
       }}
     >
       <figure className='relative mb-2 w-full h-4/5'>
