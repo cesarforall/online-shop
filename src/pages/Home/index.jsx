@@ -4,12 +4,13 @@ import Modal from '../../components/Modal'
 import Card from '../../components/Card/Card'
 import ProductDetail from '../../components/ProductDetail'
 import './Home.css'
+import CheckoutSideMenu from '../../components/CheckoutSideMenu';
 
 function Home ({ products }) {
   const productsLength = products?.length
 
   const context = useContext(ShoppingCardContext)
-  const { showProductDetail } = context
+  const { showProductDetail, showShoppingCart } = context
 
   return (
     <div className='Home'>
@@ -17,6 +18,9 @@ function Home ({ products }) {
       <p>Mostrando {productsLength} productos</p>
       {
         showProductDetail && <Modal><ProductDetail /></Modal>
+      }
+      {
+        showShoppingCart && <Modal><CheckoutSideMenu /></Modal>
       }
       <div className='grid grid-cols-3 gap-4 w-full max-w-screen-lg'>
         {

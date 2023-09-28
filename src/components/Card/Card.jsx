@@ -7,11 +7,13 @@ function Card ({ product }) {
   const image = images[0]
 
   const context = useContext(ShoppingCardContext)
+  const { setCount, setShoppingCart, setShowShoppingCart } = context
 
   function addProductsToCart (event, product) {
     event.stopPropagation()
-    context.setCount(context.count + 1)
-    context.setShoppingCart([...context.shoppingCart, product])
+    setCount(context.count + 1)
+    setShoppingCart([...context.shoppingCart, product])
+    setShowShoppingCart((prev) => !prev)
   }
 
   return (
