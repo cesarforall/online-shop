@@ -22,7 +22,7 @@ function Home ({ products }) {
       {
         showShoppingCart && <Modal><CheckoutSideMenu /></Modal>
       }
-      <div className='grid grid-cols-3 gap-4 w-full max-w-screen-lg'>
+      <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-screen-lg'>
         {
           products?.map(product => <Card key={`${product?.id}${product.category.id}`} product={product} />)
         }
