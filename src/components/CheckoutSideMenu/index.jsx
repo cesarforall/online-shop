@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import ShoppingCardContext from '../../context/Context'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
+import OrderCard from '../OrderCard/index'
+
 function CheckoutSideMenu () {
   const context = useContext(ShoppingCardContext)
   const { shoppingCart, setShowShoppingCart } = context
@@ -14,6 +16,9 @@ function CheckoutSideMenu () {
           <XMarkIcon className='h-6 w-6 text-black' />
         </button>
       </div>
+      {
+      shoppingCart.map(product => <OrderCard key={product.id + product.title} product={product} />)
+    }
     </div>
   )
 }

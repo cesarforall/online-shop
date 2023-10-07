@@ -2,19 +2,11 @@ import React, { useContext } from 'react'
 import ShoppingCardContext from '../../context/Context'
 import { PlusIcon } from '@heroicons/react/24/solid'
 
-function Card ({ product }) {
+function Card ({ product, addProductToShoppingCart }) {
   const { title, price, images, category } = product
   const image = images[0]
 
   const context = useContext(ShoppingCardContext)
-  const { setCount, setShoppingCart, setShowShoppingCart } = context
-
-  function addProductsToCart (event, product) {
-    event.stopPropagation()
-    setCount(context.count + 1)
-    setShoppingCart([...context.shoppingCart, product])
-    setShowShoppingCart((prev) => !prev)
-  }
 
   return (
     <div
@@ -29,9 +21,13 @@ function Card ({ product }) {
         <span className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5'>{category.name}</span>
         <img className='w-full h-full object-cover rounded-lg' src={image} alt='headfones' />
         <div
-          className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1' onClick={(e) => addProductsToCart(e, product)}
+          className='absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1'
         >
-          <PlusIcon />
+          <PlusIcon onClick={(e) => {
+            e.stopPropagation()
+            addProductToShoppingCart(product)
+          }}
+          />
         </div>
       </figure>
       <p className='flex justify-between'>

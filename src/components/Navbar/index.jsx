@@ -5,6 +5,7 @@ import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 
 const Navbar = () => {
   const context = useContext(ShoppingCardContext)
+  const { setShowShoppingCart } = context
   const activeStyle = 'underline underline-offset-8'
   return (
     <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white'>
@@ -66,7 +67,7 @@ const Navbar = () => {
         </li>
         <li>
           <div className='flex gap-1'>
-            <ShoppingBagIcon className='h-5 w-5' />
+            <ShoppingBagIcon className='h-5 w-5 cursor-pointer' onClick={() => { setShowShoppingCart(prev => !prev) }} />
             {context.count}
           </div>
         </li>

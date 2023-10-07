@@ -1,16 +1,17 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ShoppingCardContext from '../../context/Context'
 import Modal from '../../components/Modal'
 import Card from '../../components/Card/Card'
 import ProductDetail from '../../components/ProductDetail'
 import './Home.css'
-import CheckoutSideMenu from '../../components/CheckoutSideMenu';
+import CheckoutSideMenu from '../../components/CheckoutSideMenu'
 
-function Home ({ products }) {
+function Home () {
+  const context = useContext(ShoppingCardContext)
+  const { products, showProductDetail, showShoppingCart, addProductToShoppingCart } = context
   const productsLength = products?.length
 
-  const context = useContext(ShoppingCardContext)
-  const { showProductDetail, showShoppingCart } = context
+  useEffect(() => { console.log(products) }, [])
 
   return (
     <div className='Home'>
@@ -24,7 +25,7 @@ function Home ({ products }) {
       }
       <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-screen-lg'>
         {
-          products?.map(product => <Card key={`${product?.id}${product.category.id}`} product={product} />)
+          products?.map(product => <Card key={`${product?.id}${product.category.id}`} product={product} addProductToShoppingCart={addProductToShoppingCart} />)
         }
       </div>
     </div>

@@ -14,11 +14,11 @@ import Navbar from '../../components/Navbar'
 import './App.css'
 import Layout from '../../components/Layout'
 
-function AppRoutes ({ products }) {
+function AppRoutes () {
   const routes = useRoutes([
     {
       path: '/',
-      element: <Home products={products} />
+      element: <Home />
     },
     {
       path: '/home',
@@ -49,18 +49,12 @@ function AppRoutes ({ products }) {
 }
 
 function App () {
-  const [products, setProducts] = useState(null)
-
-  useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products').then(response => response.json()).then(data => setProducts(data))
-  }, [])
-
   return (
     <ShoppingCardProvider>
       <BrowserRouter>
         <Navbar />
         <Layout>
-          <AppRoutes products={products} />
+          <AppRoutes />
         </Layout>
       </BrowserRouter>
     </ShoppingCardProvider>
