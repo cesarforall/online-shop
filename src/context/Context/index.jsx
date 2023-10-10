@@ -23,6 +23,15 @@ export const ShoppingCardProvider = ({ children }) => {
     setCount(count)
   }
 
+  function updateProducts (product) {
+    const productToFind = product.id
+    const index = products.findIndex(product => product.id === productToFind)
+    const newProduct = { ...products[index], isAddedToCart: true }
+    const newProducts = [...products]
+    newProducts[index] = newProduct
+    setProducts(newProducts)
+  }
+
   function addProductToShoppingCart (product) {
     const productId = product?.id
     const isProductOnShoppingCart = shoppingCart.find(product => product.id === productId)
@@ -30,6 +39,7 @@ export const ShoppingCardProvider = ({ children }) => {
     const newShoppingCart = [...shoppingCart, product]
     setShoppingCart(newShoppingCart)
     updateCount()
+    updateProducts(product)
     setShowShoppingCart(true)
   }
 
