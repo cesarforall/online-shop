@@ -2,8 +2,9 @@ import React from 'react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
 function OrderCard ({ product }) {
-  const { id, title, imageUrl, price } = product
-  const image = 'https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg'
+  const { id, title, images, price } = product
+  const image = images[0]
+  const imageUrl = 'https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg'
 
   return (
     <div className='flex justify-between items-center'>
