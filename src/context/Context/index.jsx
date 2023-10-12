@@ -13,7 +13,7 @@ export const ShoppingCardProvider = ({ children }) => {
 
   useEffect(() => {
     fetch('https://api.escuelajs.co/api/v1/products').then(response => response.json()).then(data => setProducts(data))
-  }, [])
+  }, [order])
 
   useEffect(() => {
     updateCount()
