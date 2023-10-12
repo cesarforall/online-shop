@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import ShoppingCardContext from '../../context/Context'
 import { XMarkIcon } from '@heroicons/react/24/solid'
-
+import { totalPrice } from '../../utils'
 import OrderCard from '../OrderCard/index'
 
 function CheckoutSideMenu () {
@@ -19,6 +19,12 @@ function CheckoutSideMenu () {
       {
       shoppingCart.map(product => <OrderCard key={product.id + product.title} product={product} onDelete={deleteShoppingCartProduct} />)
     }
+      <div>
+        <p className='flex gap-1'>
+          <span>Total:</span>
+          <span className='font-medium'>{totalPrice(shoppingCart)}$</span>
+        </p>
+      </div>
     </div>
   )
 }
