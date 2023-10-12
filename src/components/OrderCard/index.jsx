@@ -1,7 +1,7 @@
 import React from 'react'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
-function OrderCard ({ product }) {
+function OrderCard ({ product, onDelete }) {
   const { id, title, images, price } = product
   const image = images[0]
   const imageUrl = 'https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg'
@@ -16,7 +16,7 @@ function OrderCard ({ product }) {
       </div>
       <div className='flex gap-2 items-center'>
         <p className='text-lg font-medium'>${price}</p>
-        <XMarkIcon className='h-4 w-4 text-black' />
+        <XMarkIcon className='h-4 w-4 text-black cursor-pointer' onClick={() => onDelete(product)} />
       </div>
     </div>
   )

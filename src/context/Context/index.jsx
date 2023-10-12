@@ -23,11 +23,14 @@ export const ShoppingCardProvider = ({ children }) => {
     setCount(count)
   }
 
-  function updateProducts (product) {
+  function updateProducts (product, deleteProduct) {
     const productToFind = product.id
     const index = products.findIndex(product => product.id === productToFind)
-    const newProduct = { ...products[index], isAddedToCart: true }
     const newProducts = [...products]
+    let newProduct
+    deleteProduct
+      ? newProduct = { ...products[index], isAddedToCart: false }
+      : newProduct = { ...products[index], isAddedToCart: true }
     newProducts[index] = newProduct
     setProducts(newProducts)
   }
@@ -43,6 +46,13 @@ export const ShoppingCardProvider = ({ children }) => {
     setShowShoppingCart(true)
   }
 
+  function deleteShoppingCartProduct (product) {
+    const productId = product.id
+    const newShoppingCart = [...shoppingCart].filter(product => product.id !== productId)
+    setShoppingCart(newShoppingCart)
+    updateProducts(product, true)
+  }
+
   return (
     <ShoppingCardContext.Provider value={{
       count,
@@ -55,7 +65,8 @@ export const ShoppingCardProvider = ({ children }) => {
       setShoppingCart,
       showShoppingCart,
       setShowShoppingCart,
-      addProductToShoppingCart
+      addProductToShoppingCart,
+      deleteShoppingCartProduct
     }}
     >
       {children}

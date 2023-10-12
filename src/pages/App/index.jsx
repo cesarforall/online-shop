@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { useRoutes, BrowserRouter } from 'react-router-dom'
 import { ShoppingCardProvider } from '../../context/Context'
 
