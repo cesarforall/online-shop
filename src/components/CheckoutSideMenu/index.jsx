@@ -17,6 +17,7 @@ function CheckoutSideMenu () {
     }
     setOrder((prev) => [...prev, orderToAdd])
     setShoppingCart([])
+    setShowShoppingCart(prev => !prev)
   }
 
   return (
