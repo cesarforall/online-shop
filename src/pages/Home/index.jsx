@@ -11,7 +11,7 @@ function Home () {
   const { products, showProductDetail, showShoppingCart, addProductToShoppingCart } = context
   const productsLength = products?.length
 
-  useEffect(() => { console.log(products) }, [])
+  useEffect(() => { }, [])
 
   return (
     <div className='Home'>

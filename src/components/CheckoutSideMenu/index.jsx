@@ -6,7 +6,18 @@ import OrderCard from '../OrderCard/index'
 
 function CheckoutSideMenu () {
   const context = useContext(ShoppingCardContext)
-  const { shoppingCart, setShowShoppingCart, deleteShoppingCartProduct } = context
+  const { shoppingCart, setShoppingCart, setShowShoppingCart, deleteShoppingCartProduct, order, setOrder } = context
+
+  const handleCheckout = () => {
+    const orderToAdd = {
+      date: '01.02.23',
+      product: shoppingCart,
+      totalProducts: shoppingCart.length,
+      totalPrice: totalPrice(shoppingCart)
+    }
+    setOrder((prev) => [...prev, orderToAdd])
+    setShoppingCart([])
+  }
 
   return (
     <div className='ProductDetail flex flex-col gap-4 fixed top-16 right-0 w-96 min-h-1 max-h-[80%] p-6 z-10 border border-black rounded-lg bg-white overflow-auto'>
@@ -20,11 +31,12 @@ function CheckoutSideMenu () {
       shoppingCart.map(product => <OrderCard key={product.id + product.title} product={product} onDelete={deleteShoppingCartProduct} />)
     }
       <div>
-        <p className='flex gap-1'>
+        <p className='flex justify-between gap-1'>
           <span>Total:</span>
           <span className='font-medium'>{totalPrice(shoppingCart)}$</span>
         </p>
       </div>
+      <button className='bg-black w-full py-3 text-white rounded-lg' onClick={() => handleCheckout()}>Checkout</button>
     </div>
   )
 }
