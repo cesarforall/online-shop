@@ -9,11 +9,12 @@ export const ShoppingCardProvider = ({ children }) => {
   const [productDetail, setProductDetail] = useState({})
   const [shoppingCart, setShoppingCart] = useState([])
   const [showShoppingCart, setShowShoppingCart] = useState(false)
-  const [order, setOrder] = useState([])
+  const [orders, setOrders] = useState([])
+  const [lastOrder, setLastOrder] = useState([])
 
   useEffect(() => {
     fetch('https://api.escuelajs.co/api/v1/products').then(response => response.json()).then(data => setProducts(data))
-  }, [order])
+  }, [orders])
 
   useEffect(() => {
     updateCount()
@@ -68,8 +69,10 @@ export const ShoppingCardProvider = ({ children }) => {
       setShowShoppingCart,
       addProductToShoppingCart,
       deleteShoppingCartProduct,
-      order,
-      setOrder
+      orders,
+      setOrders,
+      lastOrder,
+      setLastOrder
     }}
     >
       {children}

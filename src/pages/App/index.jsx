@@ -36,6 +36,10 @@ function AppRoutes () {
       element: <MyOrders />
     },
     {
+      path: '/my-orders/last',
+      element: <MyOrder />
+    },
+    {
       path: '/sign-in',
       element: <SignIn />
     },
