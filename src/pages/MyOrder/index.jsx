@@ -1,31 +1,42 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import ShoppingCardContext from '../../context/Context'
+import { Link } from 'react-router-dom'
 import OrderCard from '../../components/OrderCard'
+import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import './MyOrder.css'
 
 function MyOrder () {
   const context = useContext(ShoppingCardContext)
-  const { lastOrder } = context
-  const [myOrder, setMyOrder] = useState(lastOrder)
-  const lastOrderProducts = myOrder?.products
-  const lastOrderTotal = myOrder?.totalPrice
+  const { orders, lastOrder } = context
 
-  useEffect(() => { }, [lastOrder])
+  const currentPath = window.location.pathname
+  const currentPathSlashIndex = currentPath.lastIndexOf('/')
+  const currentPathSubstring = currentPath.substring(currentPathSlashIndex + 1, currentPath.length)
+  const isCurrentPathId = currentPathSubstring !== 'last'
 
-  console.log(lastOrder, myOrder)
+  const order = isCurrentPathId ? orders[parseInt(currentPathSubstring)] : []
+  const lastOrderProducts = lastOrder.products
+  const lastOrderTotal = lastOrder.total
+  const products = order?.products
+  const total = order?.totalPrice
 
   return (
     <div className='MyOrder flex flex-col gap-4 w-96 p-6 overflow-auto'>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center pb-4'>
+        <Link to='/my-orders'>
+          <ChevronLeftIcon className='w-6 h-6 text-black' />
+        </Link>
         <h2 className='w-full text-center font-semibold'>My order</h2>
       </div>
       {
-        lastOrderProducts ? lastOrderProducts?.map(product => <OrderCard key={product.id + product.title} product={product} />) : 'No hay productos'
+        !isCurrentPathId
+          ? lastOrderProducts?.map(product => <OrderCard key={product.id + product.title} product={product} />)
+          : products?.map(product => <OrderCard key={product.id + product.title} product={product} />)
       }
       <div>
         <p className='flex justify-between gap-1'>
           <span>Total:</span>
-          <span className='font-medium'>{lastOrderTotal}$</span>
+          <span className='font-medium'>{!isCurrentPathId ? lastOrderTotal : total}$</span>
         </p>
       </div>
     </div>
