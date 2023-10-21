@@ -1,15 +1,19 @@
 import React from 'react'
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
+import { Link } from 'react-router-dom'
+import { CalendarIcon, ChevronRightIcon, ShoppingCartIcon, CurrencyEuroIcon } from '@heroicons/react/24/outline'
 
-function OrdersCard ({ totalPrice, totalProducts, date }) {
+function OrdersCard ({ totalPrice, totalProducts, date, id }) {
   return (
     <div className='flex gap-4 justify-between items-center p-4 border rounded-lg border-black'>
-      <p>
-        <span>Date: {date}</span>
-        <span>Total products: {totalProducts}</span>
-        <span>Total price: {totalPrice}</span>
-      </p>
-      <ArrowTopRightOnSquareIcon className='w-6 h-6 text-black cursor-pointer' />
+      <ShoppingCartIcon className='w-6 h-6 text-black' />
+      <span>Products: {totalProducts}</span>
+      <CurrencyEuroIcon className='w-6 h-6 text-black' />
+      <span>${totalPrice}</span>
+      <CalendarIcon className='w-6 h-6 text-black' />
+      <span>Date: {date}</span>
+      <Link to={`/my-orders/${id}`}>
+        <ChevronRightIcon className='w-6 h-6 text-black cursor-pointer' />
+      </Link>
     </div>
   )
 }
