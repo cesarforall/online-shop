@@ -16,7 +16,7 @@ function MyOrder () {
 
   const order = isCurrentPathId ? orders[parseInt(currentPathSubstring)] : []
   const lastOrderProducts = lastOrder.products
-  const lastOrderTotal = lastOrder.total
+  const lastOrderTotal = lastOrder.totalPrice
   const products = order?.products
   const total = order?.totalPrice
 
