@@ -24,6 +24,10 @@ function AppRoutes () {
       element: <Home />
     },
     {
+      path: '/all',
+      element: <Home />
+    },
+    {
       path: '/my-account',
       element: <MyAccount />
     },
@@ -37,6 +41,10 @@ function AppRoutes () {
     },
     {
       path: '/my-orders/last',
+      element: <MyOrder />
+    },
+    {
+      path: '/my-orders/:id',
       element: <MyOrder />
     },
     {
