@@ -1,27 +1,70 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ShoppingCardContext from '../../context/Context'
 import Modal from '../../components/Modal'
 import Card from '../../components/Card/Card'
 import ProductDetail from '../../components/ProductDetail'
 import './Home.css'
 
+function getRandomNumbers (n, max) {
+  const randomNumbers = []
+
+  for (let i = 0; i < n; i++) {
+    const random = Math.floor(Math.random() * max)
+    randomNumbers.push(random)
+  }
+
+  return randomNumbers
+}
+
+function getRandomNames (n, max, products) {
+  const randomNumbers = getRandomNumbers(n, max)
+  const randomNames = randomNumbers.map(number => {
+    const product = products.find(product => product.id === number)
+    return product?.title.toLowerCase()
+  })
+  return randomNames
+}
+
+function searchProductsByTitle (products, searchValue) {
+  if (searchValue === '') return products
+  const filteredProducts = products?.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase()))
+  return filteredProducts
+}
+
 function Home () {
   const context = useContext(ShoppingCardContext)
   const { products, showProductDetail, addProductToShoppingCart } = context
-  const productsLength = products?.length
 
-  useEffect(() => { }, [])
+  const [searchValue, setSearchValue] = useState('')
+
+  const randomNames = getRandomNames(1, products.length, products)
+
+  const filteredProducts = searchProductsByTitle(products, searchValue)
+
+  function onInputValueChange (e) {
+    const inputValue = e.target.value
+    setSearchValue(inputValue)
+  }
+
+  useEffect(() => {}, [searchValue])
 
   return (
-    <div className='Home'>
-      <h1>Home</h1>
-      <p>Mostrando {productsLength} productos</p>
+    <div className='flex flex-col items-center gap-4'>
+      <h1 className='font-medium text-xl'>Exclusive Products</h1>
+      <input
+        type='text' placeholder={randomNames.join(', ')} className='rounded-lg border border-black w-80 p-2 italic focus:outline-none' onChange={(e) => onInputValueChange(e)} value={searchValue}
+      />
+      {
+        filteredProducts.length > 0
+          ? <p>Mostrando {filteredProducts.length} productos</p>
+          : <p>😅 No hay productos para mostrar</p>
+      }
       {
         showProductDetail && <Modal><ProductDetail /></Modal>
       }
       <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-screen-lg'>
         {
-          products?.map(product => <Card key={`${product?.id}${product.category.id}`} product={product} addProductToShoppingCart={addProductToShoppingCart} />)
+          filteredProducts?.map(product => <Card key={`${product?.id}${product.category.id}`} product={product} addProductToShoppingCart={addProductToShoppingCart} />)
         }
       </div>
     </div>
