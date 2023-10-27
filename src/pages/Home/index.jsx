@@ -3,18 +3,8 @@ import ShoppingCardContext from '../../context/Context'
 import Modal from '../../components/Modal'
 import Card from '../../components/Card/Card'
 import ProductDetail from '../../components/ProductDetail'
+import { getRandomNumbers } from '../../utils'
 import './Home.css'
-
-function getRandomNumbers (n, max) {
-  const randomNumbers = []
-
-  for (let i = 0; i < n; i++) {
-    const random = Math.floor(Math.random() * max)
-    randomNumbers.push(random)
-  }
-
-  return randomNumbers
-}
 
 function getRandomNames (n, max, products) {
   const randomNumbers = getRandomNumbers(n, max)

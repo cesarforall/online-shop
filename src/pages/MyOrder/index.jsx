@@ -3,15 +3,14 @@ import ShoppingCardContext from '../../context/Context'
 import { Link } from 'react-router-dom'
 import OrderCard from '../../components/OrderCard'
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
+import { getCurrentPathSubstring } from '../../utils'
 import './MyOrder.css'
 
 function MyOrder () {
   const context = useContext(ShoppingCardContext)
   const { orders, lastOrder } = context
 
-  const currentPath = window.location.pathname
-  const currentPathSlashIndex = currentPath.lastIndexOf('/')
-  const currentPathSubstring = currentPath.substring(currentPathSlashIndex + 1, currentPath.length)
+  const currentPathSubstring = getCurrentPathSubstring()
   const isCurrentPathId = currentPathSubstring !== 'last'
 
   const order = isCurrentPathId ? orders[parseInt(currentPathSubstring)] : []
