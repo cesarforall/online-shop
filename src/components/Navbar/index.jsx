@@ -5,8 +5,9 @@ import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 
 const Navbar = () => {
   const context = useContext(ShoppingCardContext)
-  const { setShowShoppingCart } = context
-  const activeStyle = 'underline underline-offset-8'
+  const { setShowShoppingCart, categories } = context
+
+  // const activeStyle = 'underline underline-offset-8'
   return (
     <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white'>
       <ul className='flex items-center gap-3'>
@@ -18,36 +19,21 @@ const Navbar = () => {
         <li>
           <NavLink
             to='/all'
-            // className={(isActive) => isActive ? activeStyle : undefined}
           >
             All
           </NavLink>
         </li>
-        <li>
-          <NavLink to='/clothes'>
-            Clothes
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/electronics'>
-            Electronics
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/furnitures'>
-            Furnitures
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/toys'>
-            Toys
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/others'>
-            Others
-          </NavLink>
-        </li>
+        {
+          categories.map(category => {
+            return (
+              <li key={category}>
+                <NavLink to={`/${category}`}>
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </NavLink>
+              </li>
+            )
+          })
+        }
       </ul>
       <ul className='flex items-center gap-3'>
         <li>

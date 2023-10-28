@@ -23,7 +23,7 @@ function filterProductsByTitle (products, searchValue) {
 
 function searchProductsByCategory (products, category) {
   const lowerCaseCategory = category.toLowerCase()
-  if (lowerCaseCategory === 'all' || '') {
+  if (lowerCaseCategory === 'all' || lowerCaseCategory === '') {
     return products
   }
   const productsByCategory = products?.filter(product => product?.category?.name.toLowerCase() === lowerCaseCategory)

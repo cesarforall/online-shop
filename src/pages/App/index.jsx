@@ -1,5 +1,5 @@
 import { useRoutes, BrowserRouter } from 'react-router-dom'
-import { ShoppingCardProvider } from '../../context/Context'
+import ShoppingCardContext, { ShoppingCardProvider } from '../../context/Context'
 
 import Home from '../Home'
 import MyAccount from '../MyAccount'
@@ -8,21 +8,25 @@ import MyOrders from '../MyOrders'
 import NotFound from '../NotFound'
 import SignIn from '../SignIn'
 
+import Layout from '../../components/Layout'
 import Navbar from '../../components/Navbar'
 
 import './App.css'
-import Layout from '../../components/Layout'
+import { useContext } from 'react'
 
 function AppRoutes () {
-  const routes = useRoutes([
+  const context = useContext(ShoppingCardContext)
+  const { categories } = context
+
+  const categoriesRoutes = categories.map(category => {
+    const path = { path: `/${category}`, element: <Home /> }
+    return path
+  })
+
+  const defaultRoutes = [
     { path: '/', element: <Home /> },
     { path: '/home', element: <Home /> },
     { path: '/all', element: <Home /> },
-    { path: '/clothes', element: <Home /> },
-    { path: '/electronics', element: <Home /> },
-    { path: '/furnitures', element: <Home /> },
-    { path: '/toys', element: <Home /> },
-    { path: '/others', element: <Home /> },
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order', element: <MyOrder /> },
     { path: '/my-orders', element: <MyOrders /> },
@@ -30,7 +34,12 @@ function AppRoutes () {
     { path: '/my-orders/:id', element: <MyOrder /> },
     { path: '/sign-in', element: <SignIn /> },
     { path: '*', element: <NotFound /> }
-  ])
+  ]
+
+  const newRoutes = [...categoriesRoutes, ...defaultRoutes]
+
+  const routes = useRoutes(newRoutes)
+
   return routes
 }
 

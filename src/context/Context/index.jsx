@@ -11,9 +11,18 @@ export const ShoppingCardProvider = ({ children }) => {
   const [showShoppingCart, setShowShoppingCart] = useState(false)
   const [orders, setOrders] = useState([])
   const [lastOrder, setLastOrder] = useState([])
+  const [categories, setCategories] = useState([])
+
+  function getCategories (products) {
+    return Array.from(new Set(products.map(product => product.category.name.toLowerCase()).filter(product => product !== '')))
+  }
 
   useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products').then(response => response.json()).then(data => setProducts(data))
+    fetch('https://api.escuelajs.co/api/v1/products').then(response => response.json()).then(data => {
+      setProducts(data)
+      const newCategories = getCategories(data)
+      setCategories(newCategories)
+    })
   }, [orders])
 
   useEffect(() => {
@@ -72,7 +81,8 @@ export const ShoppingCardProvider = ({ children }) => {
       orders,
       setOrders,
       lastOrder,
-      setLastOrder
+      setLastOrder,
+      categories
     }}
     >
       {children}
