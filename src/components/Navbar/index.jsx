@@ -7,18 +7,21 @@ const Navbar = () => {
   const context = useContext(ShoppingCardContext)
   const { setShowShoppingCart, categories } = context
 
-  // const activeStyle = 'underline underline-offset-8'
+  const activeStyle = 'underline underline-offset-8'
+
   return (
     <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white'>
       <ul className='flex items-center gap-3'>
         <li className='font-semibold text-lg'>
           <NavLink to='/'>
-            Home
+            Online Shop
           </NavLink>
         </li>
         <li>
           <NavLink
             to='/all'
+            className={({ isActive }) =>
+              isActive ? activeStyle : undefined}
           >
             All
           </NavLink>
@@ -27,7 +30,10 @@ const Navbar = () => {
           categories.map(category => {
             return (
               <li key={category}>
-                <NavLink to={`/${category}`}>
+                <NavLink
+                  to={`/${category}`} className={({ isActive }) =>
+                    isActive ? activeStyle : undefined}
+                >
                   {category.charAt(0).toUpperCase() + category.slice(1)}
                 </NavLink>
               </li>
