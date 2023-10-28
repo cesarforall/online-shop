@@ -3,7 +3,7 @@ import ShoppingCardContext from '../../context/Context'
 import Modal from '../../components/Modal'
 import Card from '../../components/Card/Card'
 import ProductDetail from '../../components/ProductDetail'
-import { getRandomNumbers } from '../../utils'
+import { getCurrentPathSubstring, getRandomNumbers } from '../../utils'
 import './Home.css'
 
 function getRandomNames (n, max, products) {
@@ -15,10 +15,19 @@ function getRandomNames (n, max, products) {
   return randomNames
 }
 
-function searchProductsByTitle (products, searchValue) {
+function filterProductsByTitle (products, searchValue) {
   if (searchValue === '') return products
   const filteredProducts = products?.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase()))
   return filteredProducts
+}
+
+function searchProductsByCategory (products, category) {
+  const lowerCaseCategory = category.toLowerCase()
+  if (lowerCaseCategory === 'all' || '') {
+    return products
+  }
+  const productsByCategory = products?.filter(product => product?.category?.name.toLowerCase() === lowerCaseCategory)
+  return productsByCategory
 }
 
 function Home () {
@@ -27,16 +36,19 @@ function Home () {
 
   const [searchValue, setSearchValue] = useState('')
 
-  const randomNames = getRandomNames(1, products.length, products)
+  const category = getCurrentPathSubstring()
+  const productsByCategory = searchProductsByCategory(products, category)
+  const filteredProducts = filterProductsByTitle(productsByCategory, searchValue)
 
-  const filteredProducts = searchProductsByTitle(products, searchValue)
+  const randomNames = getRandomNames(1, productsByCategory.length, products)
 
   function onInputValueChange (e) {
     const inputValue = e.target.value
     setSearchValue(inputValue)
   }
 
-  useEffect(() => {}, [searchValue])
+  useEffect(() => {
+  }, [searchValue])
 
   return (
     <div className='flex flex-col items-center gap-4'>
