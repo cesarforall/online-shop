@@ -12,16 +12,26 @@ export const ShoppingCardProvider = ({ children }) => {
   const [orders, setOrders] = useState([])
   const [lastOrder, setLastOrder] = useState([])
   const [categories, setCategories] = useState([])
+  const [categoriesData, setCategoriesData] = useState([])
 
   function getCategories (products) {
-    return Array.from(new Set(products.map(product => product.category.name.toLowerCase()).filter(product => product !== '')))
+    const categories = Array.from(new Set(products.map(product => JSON.stringify(product.category))))
+      .map(categoryString => JSON.parse(categoryString))
+
+    return categories
+  }
+
+  function getCategoryNames (categories) {
+    return Array.from(new Set(categories.map(category => category.name.toLowerCase()).filter(product => product !== '')))
   }
 
   useEffect(() => {
     fetch('https://api.escuelajs.co/api/v1/products').then(response => response.json()).then(data => {
       setProducts(data)
-      const newCategories = getCategories(data)
+      const categoriesData = getCategories(data)
+      const newCategories = getCategoryNames(categoriesData)
       setCategories(newCategories)
+      setCategoriesData(categoriesData)
     })
   }, [orders])
 
@@ -82,7 +92,8 @@ export const ShoppingCardProvider = ({ children }) => {
       setOrders,
       lastOrder,
       setLastOrder,
-      categories
+      categories,
+      categoriesData
     }}
     >
       {children}
