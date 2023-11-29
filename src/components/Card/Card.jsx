@@ -27,7 +27,7 @@ function Card ({ product, addProductToShoppingCart }) {
       </figure>
       <p className='flex justify-between'>
         <span className='text-sm font-light'>{title}</span>
-        <span className='text-lg font-medium'>${price}</span>
+        <span className='text-lg font-medium'>€{price}</span>
       </p>
     </div>
   )
