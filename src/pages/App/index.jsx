@@ -2,6 +2,7 @@ import { useRoutes, BrowserRouter } from 'react-router-dom'
 import ShoppingCardContext, { ShoppingCardProvider } from '../../context/Context'
 
 import Home from '../Home'
+import Products from '../Products'
 import MyAccount from '../MyAccount'
 import MyOrder from '../MyOrder'
 import MyOrders from '../MyOrders'
@@ -19,14 +20,14 @@ function AppRoutes () {
   const { categories } = context
 
   const categoriesRoutes = categories.map(category => {
-    const path = { path: `/${category}`, element: <Home /> }
+    const path = { path: `/${category}`, element: <Products /> }
     return path
   })
 
   const defaultRoutes = [
     { path: '/', element: <Home /> },
     { path: '/home', element: <Home /> },
-    { path: '/all', element: <Home /> },
+    { path: '/all', element: <Products /> },
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order', element: <MyOrder /> },
     { path: '/my-orders', element: <MyOrders /> },

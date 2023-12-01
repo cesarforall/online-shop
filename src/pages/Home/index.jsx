@@ -3,8 +3,10 @@ import ShoppingCardContext from '../../context/Context'
 import Modal from '../../components/Modal'
 import Card from '../../components/Card/Card'
 import ProductDetail from '../../components/ProductDetail'
+import CategoryCard from '../../components/CategoryCard'
 import { getCurrentPathSubstring, getRandomNumbers } from '../../utils'
 import './Home.css'
+import { NavLink } from 'react-router-dom'
 
 function getRandomNames (n, max, products) {
   const randomNumbers = getRandomNumbers(n, max)
@@ -32,7 +34,7 @@ function searchProductsByCategory (products, category) {
 
 function Home () {
   const context = useContext(ShoppingCardContext)
-  const { products, showProductDetail, addProductToShoppingCart } = context
+  const { products, showProductDetail, addProductToShoppingCart, categoriesData } = context
 
   const [searchValue, setSearchValue] = useState('')
 
@@ -51,22 +53,19 @@ function Home () {
   }, [searchValue])
 
   return (
-    <div className='flex flex-col items-center gap-4'>
-      <h1 className='font-medium text-xl'>Exclusive Products</h1>
-      <input
-        type='text' placeholder={randomNames.join(', ')} className='rounded-lg border border-black w-80 p-2 italic focus:outline-none' onChange={(e) => onInputValueChange(e)} value={searchValue}
-      />
+    <div className='w-[1023px] flex flex-col items-center gap-4'>
+      <h1 className='font-medium text-xl'>Categorías</h1>
       {
         filteredProducts.length > 0
-          ? <p>Mostrando {filteredProducts.length} productos</p>
-          : <p>😅 No hay productos para mostrar</p>
+          ? <p>Mostrando {categoriesData.length} categorías</p>
+          : <p>😅 No hay categorías para mostrar</p>
       }
       {
         showProductDetail && <Modal><ProductDetail /></Modal>
       }
-      <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-screen-lg'>
+      <div className='grid grid-cols-autoFit200'>
         {
-          filteredProducts?.map(product => <Card key={`${product?.id}${product.category.id}`} product={product} addProductToShoppingCart={addProductToShoppingCart} />)
+          categoriesData?.map((category, index) => <NavLink key={index} to={`/${category.name}`}> <CategoryCard key={index} category={category} /></NavLink>)
         }
       </div>
     </div>
