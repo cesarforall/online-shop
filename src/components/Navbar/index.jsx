@@ -10,23 +10,45 @@ const Navbar = () => {
   const activeStyle = 'underline underline-offset-8'
 
   return (
-    <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light bg-white'>
-      <ul className='flex items-center gap-3'>
-        <li className='font-semibold text-lg'>
-          <NavLink to='/'>
-            Online Shop
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/all'
-            className={({ isActive }) =>
-              isActive ? activeStyle : undefined}
-          >
-            All
-          </NavLink>
-        </li>
-        {
+    <nav className='flex flex-col gap-3 fixed z-10 top-0 w-full p-4 font-normal text-md bg-white shadow'>
+      <NavLink className='font-semibold text-2xl text-center' to='/'>
+        Online Shop
+      </NavLink>
+      <div className='grid gap-3 items-center md:grid-cols-2'>
+        <ul className='md:order-last flex flex-wrap justify-center md:justify-end items-center gap-3'>
+          <li>
+            <NavLink to='/my-orders'>
+              My Orders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/my-account'>
+              My Account
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/sign-in'>
+              Sign In
+            </NavLink>
+          </li>
+          <li>
+            <div className='flex gap-1'>
+              <ShoppingBagIcon className='h-5 w-5 cursor-pointer' onClick={() => { setShowShoppingCart(prev => !prev) }} />
+              {context.count}
+            </div>
+          </li>
+        </ul>
+        <ul className='flex flex-wrap justify-center md:justify-start items-center gap-3'>
+          <li>
+            <NavLink
+              to='/all'
+              className={({ isActive }) =>
+                isActive ? activeStyle : undefined}
+            >
+              All
+            </NavLink>
+          </li>
+          {
           categories.map(category => {
             return (
               <li key={category}>
@@ -40,30 +62,8 @@ const Navbar = () => {
             )
           })
         }
-      </ul>
-      <ul className='flex items-center gap-3'>
-        <li>
-          <NavLink to='/my-orders'>
-            My Orders
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/my-account'>
-            My Account
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/sign-in'>
-            Sign In
-          </NavLink>
-        </li>
-        <li>
-          <div className='flex gap-1'>
-            <ShoppingBagIcon className='h-5 w-5 cursor-pointer' onClick={() => { setShowShoppingCart(prev => !prev) }} />
-            {context.count}
-          </div>
-        </li>
-      </ul>
+        </ul>
+      </div>
     </nav>
   )
 }
