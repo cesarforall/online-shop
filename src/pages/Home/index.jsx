@@ -53,7 +53,7 @@ function Home () {
   }, [searchValue])
 
   return (
-    <div className='w-[1023px] flex flex-col items-center gap-4'>
+    <div className='flex flex-col items-center gap-4'>
       <h1 className='font-medium text-xl'>Categorías</h1>
       {
         filteredProducts.length > 0
