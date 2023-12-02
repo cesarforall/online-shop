@@ -20,7 +20,7 @@ function MyOrder () {
   const total = order?.totalPrice
 
   return (
-    <div className='MyOrder flex flex-col gap-4 w-96 p-6 overflow-auto'>
+    <div className='MyOrder flex flex-col gap-4 w-full md:w-96 p-6 overflow-auto'>
       <div className='flex justify-between items-center pb-4'>
         <Link to='/my-orders'>
           <ChevronLeftIcon className='w-6 h-6 text-black' />
