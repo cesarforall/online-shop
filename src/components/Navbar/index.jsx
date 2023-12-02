@@ -10,7 +10,7 @@ const Navbar = () => {
   const activeStyle = 'underline underline-offset-8'
 
   return (
-    <nav className='flex flex-col gap-3 fixed z-10 top-0 w-full max-h-[180px] overflow-scroll md:overflow-auto p-4 font-normal text-md bg-white shadow'>
+    <nav className='flex flex-col gap-3 items-center fixed z-10 top-0 w-full max-h-[180px] overflow-scroll md:overflow-auto p-4 font-normal text-md bg-white shadow'>
       <NavLink className='font-semibold text-2xl text-center' to='/'>
         Online Shop
       </NavLink>
