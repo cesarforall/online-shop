@@ -10,11 +10,11 @@ const Navbar = () => {
   const activeStyle = 'underline underline-offset-8'
 
   return (
-    <nav className='flex flex-col gap-3 fixed z-10 top-0 w-full max-h-[140px] overflow-scroll p-4 font-normal text-md bg-white shadow'>
+    <nav className='flex flex-col gap-3 fixed z-10 top-0 w-full max-h-[180px] overflow-scroll md:overflow-auto p-4 font-normal text-md bg-white shadow'>
       <NavLink className='font-semibold text-2xl text-center' to='/'>
         Online Shop
       </NavLink>
-      <div className='grid gap-3 items-center md:grid-cols-2'>
+      <div className='grid gap-3 items-center md:items-start md:grid-cols-2'>
         <ul className='md:order-last flex flex-wrap justify-center md:justify-end items-center gap-3'>
           <li>
             <NavLink to='/my-orders'>
