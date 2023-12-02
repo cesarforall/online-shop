@@ -37,7 +37,7 @@ function Home () {
   const { showProductDetail, categoriesData } = context
 
   return (
-    <div className='w-full flex flex-col items-center gap-4 px-4'>
+    <div className='w-full max-w-[767px] flex flex-col items-center gap-4 px-4'>
       <h1 className='font-medium text-xl'>Category</h1>
       {
         showProductDetail && <Modal><ProductDetail /></Modal>
