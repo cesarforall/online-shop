@@ -23,7 +23,7 @@ function CheckoutSideMenu () {
   }
 
   return (
-    <div className='ProductDetail flex flex-col gap-4 fixed top-16 right-0 w-96 min-h-1 max-h-[80%] p-6 z-10 border border-black rounded-lg bg-white overflow-auto'>
+    <div className='flex flex-col gap-4 fixed top-[142px] right-0 mr-1 min-w-[300px] min-h-1 max-h-[70%] p-6 z-10 border border-black rounded-lg bg-white overflow-y-auto'>
       <div className='flex justify-between items-center'>
         <h2>My order</h2>
         <button onClick={(prev) => { setShowShoppingCart(!prev) }}>
