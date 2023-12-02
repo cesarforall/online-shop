@@ -7,7 +7,7 @@ function MyOrders () {
   const context = useContext(ShoppingCardContext)
   const { orders } = context
   return (
-    <div className='MyOrders'>
+    <div className='MyOrders w-full max-w-lg p-4'>
       <h1 className='font-semibold'>My Orders</h1>
       <div className='flex flex-col gap-4 pt-4'>
         {
