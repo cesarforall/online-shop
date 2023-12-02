@@ -34,38 +34,21 @@ function searchProductsByCategory (products, category) {
 
 function Home () {
   const context = useContext(ShoppingCardContext)
-  const { products, showProductDetail, addProductToShoppingCart, categoriesData } = context
-
-  const [searchValue, setSearchValue] = useState('')
-
-  const category = getCurrentPathSubstring()
-  const productsByCategory = searchProductsByCategory(products, category)
-  const filteredProducts = filterProductsByTitle(productsByCategory, searchValue)
-
-  const randomNames = getRandomNames(1, productsByCategory.length, products)
-
-  function onInputValueChange (e) {
-    const inputValue = e.target.value
-    setSearchValue(inputValue)
-  }
-
-  useEffect(() => {
-  }, [searchValue])
+  const { showProductDetail, categoriesData } = context
 
   return (
-    <div className='flex flex-col items-center gap-4'>
-      <h1 className='font-medium text-xl'>Categorías</h1>
-      {
-        filteredProducts.length > 0
-          ? <p>Mostrando {categoriesData.length} categorías</p>
-          : <p>😅 No hay categorías para mostrar</p>
-      }
+    <div className='w-full flex flex-col items-center gap-4 px-4'>
+      <h1 className='font-medium text-xl'>Category</h1>
       {
         showProductDetail && <Modal><ProductDetail /></Modal>
       }
-      <div className='grid grid-cols-autoFit200'>
+      <div className='flex flex-col w-full items-center md:grid md:grid-cols-3 gap-4 pb-4'>
         {
-          categoriesData?.map((category, index) => <NavLink key={index} to={`/${category.name}`}> <CategoryCard key={index} category={category} /></NavLink>)
+          categoriesData?.map((category, index) =>
+            <NavLink className='w-full' key={index} to={`/${category.name}`}>
+              <CategoryCard key={index} category={category} />
+            </NavLink>
+          )
         }
       </div>
     </div>
