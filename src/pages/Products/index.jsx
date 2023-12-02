@@ -8,8 +8,7 @@ import { getCurrentPathSubstring, getRandomNumbers } from '../../utils'
 function getRandomNames (n, max, products) {
   const randomNumbers = getRandomNumbers(n, max)
   const randomNames = randomNumbers.map(number => {
-    const product = products.find(product => product.id === number)
-    return product?.title.toLowerCase()
+    return products[randomNumbers[0]]?.title.toLowerCase()
   })
   return randomNames
 }
@@ -51,9 +50,9 @@ function Products () {
 
   return (
     <div className='flex flex-col items-center gap-4'>
-      <h1 className='font-medium text-xl'>Exclusive Products</h1>
+      <h1 className='font-medium text-xl'>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
       <input
-        type='text' placeholder={randomNames.join(', ')} className='rounded-lg border border-black w-80 p-2 italic focus:outline-none' onChange={(e) => onInputValueChange(e)} value={searchValue}
+        type='text' placeholder={randomNames.join(', ')} className='w-[280px] rounded-lg border border-black w-80 p-2 italic focus:outline-none' onChange={(e) => onInputValueChange(e)} value={searchValue}
       />
       {
         filteredProducts.length > 0
