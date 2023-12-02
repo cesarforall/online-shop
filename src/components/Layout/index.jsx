@@ -8,7 +8,7 @@ function Layout ({ children }) {
   const context = useContext(ShoppingCardContext)
   const { showShoppingCart } = context
   return (
-    <div className='flex flex-col mt-[180px] md:mt-32 items-center text-center'>
+    <div className='flex flex-col mt-48 md:mt-36 items-center text-center'>
       {children}
       {
         showShoppingCart && <Modal><CheckoutSideMenu /></Modal>
