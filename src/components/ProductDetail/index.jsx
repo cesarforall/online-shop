@@ -24,7 +24,7 @@ function ProductDetail () {
   const productDetail = context.productDetail
   const { title, price, description, category, images } = productDetail
   return (
-    <div className='ProductDetail flex flex-col gap-4 fixed top-16 right-0 w-96 h-auto p-6 z-10 border border-black rounded-lg bg-white'>
+    <div className='relative flex flex-col gap-4 m-auto top-[220px] w-[300px] h-auto p-6 z-10 border border-black rounded-lg bg-white'>
       <div className='flex justify-between items-center'>
         <h2>Detail</h2>
         <button onClick={(prev) => { context.setShowProductDetail(!prev) }}>
