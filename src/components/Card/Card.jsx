@@ -9,7 +9,7 @@ function Card ({ product, addProductToShoppingCart }) {
   const context = useContext(ShoppingCardContext)
   return (
     <div
-      className='bg-white cursor-pointer w-56 h-60 rounded-lg' onClick={() => {
+      className='bg-white cursor-pointer w-full md:w-[200px] h-60 rounded-lg' onClick={() => {
         if (!context.showProductDetail) {
           context.setProductDetail(product)
           context.setShowProductDetail(true)
